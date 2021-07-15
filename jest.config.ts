@@ -1,11 +1,12 @@
 import { Config } from '@jest/types';
 
 // eslint-disable-next-line no-undef
+// eslint-disable-next-line import/no-anonymous-default-export
 export default async (): Promise<Config.InitialOptions> => ({
   // verbose: true,
 
   preset: 'ts-jest',
-  testEnvironment: 'node',
+  testEnvironment: 'jsdom',
   // testMatch: ['**/+(*.)+(spec|test).+(ts|js)?(x)'],
   // moduleFileExtensions: ['ts', 'js', 'jsx', 'tsx'],
 
@@ -15,6 +16,11 @@ export default async (): Promise<Config.InitialOptions> => ({
       tsconfig: 'tsconfig.spec.json',
     },
   },
+
+  // https://www.carlrippon.com/using-jest-and-rtl-with-react-typescript/
+  setupFilesAfterEnv: [
+    '<rootDir>/jest-setup.ts',
+  ],
 
   modulePathIgnorePatterns: [
     '/node_modules/',
