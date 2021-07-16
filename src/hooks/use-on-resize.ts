@@ -7,7 +7,7 @@ import { useValueRef } from './use-value-ref';
  * First argument: Reference to attach to object
  * Second argument: Rect of that object (null on first render)
  */
-export type UseElementResizeReturn<T> = Ref<T>;
+export type UseOnResizeReturn<T> = Ref<T>;
 
 /**
  * Resize Handler Function
@@ -19,9 +19,9 @@ export interface OnResize<T> { (refElement: T): unknown }
  *
  * If a string, then is the selector for the observed node
  */
-export type UseElementResizeArgs<T> = [
-  options: OnResize<T> | { onResize: OnResize<T>, resizeSelector?: null | string },
-  resizeSelector?: null | undefined | string,
+export type UseOnResizeArgs<T> = [
+  selector: string | OnResize<T> | { onResize: OnResize<T>, selector?: null | string },
+  options?: null | undefined | OnResize<T>,
 ];
 
 
@@ -31,11 +31,12 @@ export type UseElementResizeArgs<T> = [
  * @param arg
  * @returns
  */
-function getOnResize<T>(args: UseElementResizeArgs<T>): OnResize<T> {
+function getOnResizeCb<T>(args: UseOnResizeArgs<T>): OnResize<T> {
   if (typeof args[0] === 'function') return args[0];
   if (typeof args[0] === 'object' && args[0] !== null) {
     if (typeof args[0].onResize === 'function') return args[0].onResize;
   }
+  if (typeof args[1] === 'function') return args[1];
   throw new TypeError('useElementResize requires an onResize function');
 }
 
@@ -46,11 +47,14 @@ function getOnResize<T>(args: UseElementResizeArgs<T>): OnResize<T> {
  * @param arg
  * @returns
  */
-function getSelector<T>(args: UseElementResizeArgs<T>): null | string {
-  if (typeof args[0] === 'object' && args[0] !== null) {
-    if (typeof args[0].resizeSelector === 'string') return args[0].resizeSelector;
+function getSelector<T>(args: UseOnResizeArgs<T>): null | string {
+  if (typeof args[0] === 'string') return args[0];
+  if (typeof args[0] === 'object'
+    && args[0] !== null
+    && typeof args[0].selector === 'string'
+  ) {
+    return args[0].selector;
   }
-  if (typeof args[1] === 'string') return args[1];
   return null;
 }
 
@@ -60,10 +64,10 @@ function getSelector<T>(args: UseElementResizeArgs<T>): null | string {
  * @param arg
  * @returns
  */
-export function useElementResize<T extends HTMLElement = HTMLElement>(
-  ...args: UseElementResizeArgs<T>
-): UseElementResizeReturn<T> {
-  const onResize = getOnResize(args);
+export function useOnResize<T extends HTMLElement = HTMLElement>(
+  ...args: UseOnResizeArgs<T>
+): UseOnResizeReturn<T> {
+  const onResize = getOnResizeCb(args);
   const resizeSelector = getSelector(args);
 
   const _onResize = useValueRef(onResize);
