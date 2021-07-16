@@ -45,6 +45,6 @@ export function useDOMRect<T extends HTMLElement = HTMLElement>(...args: UseDOMR
   const handleResize = useCallback((element: T) => {
     setRect(element.getBoundingClientRect());
   }, [setRect]);
-  const ref = useOnResize<T>(handleResize, selector);
+  const ref = useOnResize<T>(selector, handleResize);
   return [ref, rect];
 }

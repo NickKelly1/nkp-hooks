@@ -20,9 +20,9 @@ export interface OnResize<T> { (refElement: T): unknown }
  * If a string, then is the selector for the observed node
  */
 export type UseOnResizeArgs<T> = [
-  selector: string | OnResize<T> | { onResize: OnResize<T>, selector?: null | string },
+  selector: null | undefined | string | OnResize<T> | { onResize: OnResize<T>, selector?: null | string },
   options?: null | undefined | OnResize<T>,
-];
+]
 
 
 /**
