@@ -5,11 +5,11 @@
 ### Added
 
 - Documentation
-- useClayoutEffect
-- useDOMRect
-- useHaveEffectsMounted
-- useHaveLayoutsMounted
-- useMergeRefs
-- useOnResize
-- useRefEffect
-- useValueRef
+- Hook: useClayoutEffect
+- Hook: useDOMRect
+- Hook: useHaveEffectsMounted
+- Hook: useHaveLayoutsMounted
+- Hook: useMergeRefs
+- Hook: useOnResize
+- Hook: useRefEffect
+- Hook: useValueRef
