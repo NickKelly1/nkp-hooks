@@ -4,13 +4,13 @@ A set of common utility react hooks.
 
 ## Hooks
 
-- [useClayoutEffect](#useClayoutEffect): Isomorphic useLayoutEffect - useEffect for SSR, useLayoutEffect in the browser.
-- [useDOMRect](#useDOMRect): DOMRect from the element, auto-updating on resize.
-- [useHaveEffectsMounted](#useHaveEffectsMounted): Have effects mounted (has useEffect fired?).
-- [useHaveLayoutsMounted](#useHaveLayoutsMounted): Have layouts mounted (has useLayoutEffect fired?).
-- [useMergeRefs](#useMergeRefs): Synchronises refs together. Useful with `forwardRef`.
-- [useOnResize](#useOnResize): Fires a callback when the target element resizes
-- [useValueRef](#useValueRef): Keeps a synchronised reference to the value.
+- [useClayoutEffect](###useClayoutEffect): Isomorphic useLayoutEffect - useEffect for SSR, useLayoutEffect in the browser.
+- [useDOMRect](###useDOMRect): DOMRect from the element, auto-updating on resize.
+- [useHaveEffectsMounted](###useHaveEffectsMounted): Have effects mounted (has useEffect fired?).
+- [useHaveLayoutsMounted](###useHaveLayoutsMounted): Have layouts mounted (has useLayoutEffect fired?).
+- [useMergeRefs](###useMergeRefs): Synchronises refs together. Useful with `forwardRef`.
+- [useOnResize](###useOnResize): Fires a callback when the target element resizes
+- [useValueRef](###useValueRef): Keeps a synchronised reference to the value.
 
 ### useClayoutEffect
 
@@ -49,14 +49,12 @@ Depends on `ResizeObserver`.
 
 ```tsx
 function WithUseDOMRect() {
-  const [ref, rect] = useDomRect();
-
-  useEffect(() => {
+  const ref = useDomRect((rect) => {
     console.log('the new rect is:', rect);
-  }, [rect]);
+  });
 
   return (
-    <div ref={mainRef}>
+    <div ref={ref}>
       <div>hello world</div>
     </div>
   )
