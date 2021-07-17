@@ -13,7 +13,7 @@ describe('useDOMRect', () => {
     let didRender = false;
     function Component() {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const [ref, rect] = useDOMRect<HTMLDivElement>();
+      const ref = useDOMRect<HTMLDivElement>();
       useEffect(() => void (didRender = true), []);
       return (
         <div

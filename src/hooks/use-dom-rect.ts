@@ -1,4 +1,4 @@
-import { Ref, useEffect, useState } from 'react';
+import { Ref, useRef } from 'react';
 import { useOnResize } from './use-on-resize';
 import { useValueRef } from './use-value-ref';
 
@@ -8,7 +8,7 @@ import { useValueRef } from './use-value-ref';
  * First argument: Reference to attach to object
  * Second argument: Rect of that object (null on first render)
  */
-export type UseDOMRectReturn<T> = [ref: Ref<T>, rect: null | DOMRect]
+export type UseDOMRectReturn<T> = Ref<T>;
 
 
 export interface DOMRectOnResize {
@@ -83,23 +83,17 @@ export function useDOMRect<T extends HTMLElement = HTMLElement>(...args: UseDOMR
   const selector = getSelector(args);
   const onResize = useValueRef(getOnDomRectResize(args));
 
-  const [rect, setRect] = useState<DOMRect | null>(null);
-
-  // call onResize on rect change
-  useEffect(() => {
-    if (!onResize.current) return;
-    if (!rect) return;
-    onResize.current?.(rect);
-  }, [rect]);
+  const lastRect = useRef<DOMRect | null>(null);
 
   const ref = useOnResize<T>(selector, function handleResize(element) {
     // only update if the rect actually changed
     const next = element.getBoundingClientRect();
-    if (!(rect === null || rectsAreDifferent(rect, next))) return;
-    setRect(next);
+    if (!(lastRect.current === null || rectsAreDifferent(lastRect.current, next))) return;
+    lastRect.current = next;
+    onResize.current?.(next);
   });
 
-  return [ref, rect];
+  return ref;
 }
 
 /**

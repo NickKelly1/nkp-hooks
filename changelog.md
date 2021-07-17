@@ -1,6 +1,14 @@
 # Changelog
 
-## 0.0.4
+## 0.0.5 - 2021-06-16
+
+### Changed
+
+- **useDomRect**
+  - Removed `rect` as the second array element returned from useDOMReact to reduce unecessary re-renders when the rect changes
+  - Now returns a single value, the `ref` to be attached
+
+## 0.0.4 - 2021-06-15
 
 ### Changed
 

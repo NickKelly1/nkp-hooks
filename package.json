@@ -2,7 +2,7 @@
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "name": "@nkp/hooks",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "A set of useful React hooks",
   "author": "Nick Kelly",
   "homepage": "https://github.com/NickKelly1/nkp-hooks#readme",
