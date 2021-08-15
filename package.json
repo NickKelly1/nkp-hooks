@@ -1,5 +1,6 @@
 {
   "main": "dist/index.js",
+  "sideEffects": "false",
   "module": "dist/index.es.js",
   "name": "@nkp/hooks",
   "version": "0.0.5",
