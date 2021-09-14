@@ -1,7 +1,7 @@
 # @nkp/hooks
 
 [![npm version](https://badge.fury.io/js/%40nkp%2Fcolor.svg)](https://www.npmjs.com/package/@nkp/hooks)
-[![Node.js Package](https://github.com/nickkelly1/nkp-hooks/actions/workflows/npm-publish.yml/badge.svg)](https://github.com/nickkelly1/nkp-hooks/actions/workflows/npm-publish.yml)
+[![Node.js Package](https://github.com/nickkelly1/nkp-hooks/actions/workflows/release.yml/badge.svg)](https://github.com/nickkelly1/nkp-hooks/actions/workflows/release.yml)
 ![Known Vulnerabilities](https://snyk.io/test/github/nickkelly1/nkp-hooks/badge.svg)
 
 NPM package. Provides a set of common utility react hooks.
